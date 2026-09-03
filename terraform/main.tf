@@ -12,7 +12,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "devsecops_lab" {
-#checkov:skip=CKV_AWS_144:S3 cross-region replication is not required for this development lab
+  #checkov:skip=CKV_AWS_144:S3 cross-region replication is not required for this development lab
 
   bucket = "devsecops-lab-demo-bucket"
 

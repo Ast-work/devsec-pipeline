@@ -1,7 +1,7 @@
 resource "aws_s3_bucket" "logs" {
   bucket = "devsecops-lab-logs-bucket"
-#checkov:skip=CKV_AWS_144:S3 cross-region replication is not required for this development lab
-#checkov:skip=CKV2_AWS_62:Event notifications are not required for the dedicated S3 access-log destination bucket
+  #checkov:skip=CKV_AWS_144:S3 cross-region replication is not required for this development lab
+  #checkov:skip=CKV2_AWS_62:Event notifications are not required for the dedicated S3 access-log destination bucket
 }
 
 resource "aws_s3_bucket_public_access_block" "logs" {
