@@ -25,5 +25,6 @@ jobs:
         with:
           image-ref: devsecops-demo:${{ github.sha }}
           format: table
+          ignorefile: .trivyignore
           severity: HIGH,CRITICAL
           exit-code: '1'
