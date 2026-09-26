@@ -46,3 +46,9 @@ jobs:
           IMAGE=$(echo "$IMAGE" | tr '[:upper:]' '[:lower:]')
           docker tag devsecops-demo:${{ github.sha }} $IMAGE
           docker push $IMAGE
+          DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' "$IMAGE" | cut -d'@' -f2)
+          echo "IMAGE=$IMAGE" >> "$GITHUB_OUTPUT"
+          echo "DIGEST=$DIGEST" >> "$GITHUB_OUTPUT"
+
+          echo "Published image: $IMAGE"
+          echo "Image digest: $DIGEST"
