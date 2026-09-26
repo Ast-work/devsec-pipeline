@@ -27,12 +27,17 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Pull container image
+        env:
+          IMAGE_DIGEST: ${{ inputs.image_digest }}
         run: |
-          IMAGE=ghcr.io/${{ github.repository_owner }}/devsecops-demo:${{ github.sha }}
+          IMAGE=ghcr.io/${{ github.repository_owner }}/devsecops-demo
           IMAGE=$(echo "$IMAGE" | tr '[:upper:]' '[:lower:]')
-          docker pull "$IMAGE@${{ inputs.image_digest }}"
+          docker pull "$IMAGE@$IMAGE_DIGEST"
+
+
+
+
       - name: Run container
         run: |
           IMAGE=ghcr.io/${{ github.repository_owner }}/devsecops-demo:${{ github.sha }}
