@@ -2,6 +2,11 @@ name: Deploy Dev
 
 on:
   workflow_dispatch:
+    inputs:
+      image_digest:
+        description: "SHA-256 digest of the container image to deploy"
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -27,8 +32,7 @@ jobs:
         run: |
           IMAGE=ghcr.io/${{ github.repository_owner }}/devsecops-demo:${{ github.sha }}
           IMAGE=$(echo "$IMAGE" | tr '[:upper:]' '[:lower:]')
-          docker pull "$IMAGE"
-
+          docker pull "$IMAGE@${{ inputs.image_digest }}"
       - name: Run container
         run: |
           IMAGE=ghcr.io/${{ github.repository_owner }}/devsecops-demo:${{ github.sha }}
